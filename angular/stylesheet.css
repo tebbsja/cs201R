@@ -1,0 +1,13 @@
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+#to-do-bullets {
+margin-top: 10px;
+}
+
+#remover {
+  margin-top: 10px;
+}
