@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Sign Up</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheet3.css" rel="stylesheet">
+    <script src="app3.js"></script>
+    <script type="text/javascript" src="angular-validation-match.js"></script>
+
+  </head>
+
+  <body ng-app="myApp" ng-controller="ProfileController">
+
+<div ng-hide="toHide" class="container" align="center">
+    <h1>Sign Up</h1>
+</div>
+
+    <div id="sign-up-form" ng-hide="toHide" class="container col-md-offset-4 col-md-4" align="center">
+
+        <form name="myForm" novalidate>
+            <input name="username" ng-model="Username" placeholder="Username" size="44" type="text" required><br>
+            <p class="error-text" ng-show="myForm.username.$invalid && !myForm.username.$pristine">Username is required</p>
+
+            <input ng-class="{ 'ng-invalid' : myForm.conf.$error.match && !myForm.conf.$pristine }"ng-model="Password" name="Password" placeholder="Password" size="44" type="password" required><br>
+            <input match="Password" name="conf" ng-model="ConfirmPass" placeholder="Confirm Password" size="44" type="password"><br>
+            <p class="error-text" ng-show="myForm.conf.$error.match && !myForm.conf.$pristine">Confirmation MUST match password</p>
+
+            <input name="email" ng-model="Email" placeholder="E-Mail Address" size="44" type="email" required><br>
+            <p class="error-text" ng-show="myForm.email.$invalid && !myForm.email.$pristine">Enter a valid email</p>
+
+            <input ng-model="StreetAddress" placeholder="Address" size="44" type="text"><br>
+            <input  id="city" ng-model="City" placeholder="City" type="text" size="30">
+            <input  id="state" ng-model="State" placeholder="St" maxlength="2" size="3" type="text">
+            <input id="zip" ng-model="Zip" placeholder="Zip" maxlength="5" size="6" type="text"><br>
+
+            <input ng-model="Avatar" size="44" placeholder="Select a picture from the web for your Avatar!" type="text"><br>
+            <input id="git" ng-model="GithubUser" size="21" placeholder="GitHub Username" type="text">
+            <input  id="repo" ng-model="GithubRepo" size="21" placeholder="CS 201R Repo Name" type="text"><br>
+
+            <input class="btn-primary"ng-disabled="myForm.conf.$error.match || myForm.email.$invalid || myForm.username.$invalid" ng-click="onSubmit()"  type="submit">
+        </form>
+    </div>
+
+      <div ng-repeat="users in userProfile">
+        <div align="center"id="profile">
+            <img id="avatar" ng-src="{{ users.avatar }}"/>
+              <h1 id="welcome"> Welcome, {{ users.username }}</h1>
+              <h4 id="address"> {{ users.address }} </h4>
+              <h4 id="email"> {{ users.email }} </h4>
+        </div>
+        <div align="center" id="githubRepo">
+        <h3>{{ GithubUser }} {{ GithubRepo }} Repository</h3>
+      </div>
+        <div id="git-list" class="container col-md-offset-5 col-md-4">
+            <ul ng-repeat="item in repoList">
+                <li><a href="{{item.url}}" target="_blank">{{ item.name }}</a></li>
+                <ul class="list-unstyled" ng-repeat="child in {{item.children}}">
+                    <li>{{ child }}</li>
+                </ul>
+            </ul>
+          </div>
+      </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>
