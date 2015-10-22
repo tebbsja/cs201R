@@ -19,8 +19,15 @@ myApp.controller('AccController', function($scope, $http) {
         {
           if (year_input == items[i].year)
           {
-            $scope.school.push({team: items[i].winner});
-            //console.log("success! " + items[i].winner);
+            if ($scope.football)
+            {
+              $scope.school.push({team: items[i].football});
+            }
+            else
+            {
+              $scope.school.push({team: items[i].basketball});
+            }
+            //console.log("success! " + items[i].football);
           }
         }
   	  }, function errorCallback(response)
