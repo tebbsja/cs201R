@@ -33,7 +33,13 @@
         <div id="form" class="col-md-2">
           <h5>Past ACC Champions</h5>
           <form>
-            <input ng-model="search" id="search" type="text" placeholder="Search">
+            <input ng-model="search" id="search" type="text" placeholder="Search"> <br>
+            
+            <div id="radios">
+              <input ng-model="basketball" name="sport" type='radio' value='Basketball'> Basketball
+              <input ng-model="football" name="sport" type='radio' value='Football'> Football
+            </div>
+
             <button id="search-button" ng-click="onSubmit()" class="btn btn-primary">Search</button>
           </form>
           <div id="champ" ng-repeat="schools in school">
