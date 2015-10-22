@@ -12,6 +12,9 @@ html {
   border-radius: 12px;
   margin: 15px;
 }
+#radios {
+  margin-left: -10px;
+}
 
 #search {
   margin-top: 7px;
@@ -24,7 +27,8 @@ html {
 
 #champ {
   margin-top: 12px;
-  text-align: left;
+  text-align: center;
+  font-size: 1.5em;
 }
 #logos {
   background: none !important;
