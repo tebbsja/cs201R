@@ -1,0 +1,31 @@
+html {
+    background: url("http://dukereport.com/wp-content/uploads/2015/02/acc-logo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
+}
+
+#form {
+  height: 200px;
+  text-align: center;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  margin: 15px;
+}
+
+#search {
+  margin-top: 7px;
+}
+
+#search-button {
+  margin-top: 7px;
+}
+
+
+#champ {
+  margin-top: 12px;
+  text-align: left;
+}
+#logos {
+  background: none !important;
+}
