@@ -1,63 +1,83 @@
 var ACCchamps = [
   {
     year: '2000',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Duke'
   },
   {
     year: '2001',
-    winner: 'Maryland'
+    football: 'Maryland',
+    basketball: 'Duke'
   },
   {
     year: '2002',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Duke'
   },
   {
     year: '2003',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Duke'
   },
   {
     year: '2004',
-    winner: 'Virginia Tech'
+    football: 'Virginia Tech',
+    basketball: 'Maryland'
   },
   {
     year: '2005',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Duke'
   },
   {
     year: '2006',
-    winner: 'Wake Forest'
+    football: 'Wake Forest',
+    basketball: 'Duke'
   },
   {
     year: '2007',
-    winner: 'Virginia Tech'
+    football: 'Virginia Tech',
+    basketball: 'North Carolina'
   },
   {
     year: '2008',
-    winner: 'Virginia Tech'
+    football: 'Virginia Tech',
+    basketball: 'North Carolina'
   },
   {
     year: '2009',
-    winner: 'Georgia Tech'
+    football: 'Georgia Tech',
+    basketball: 'Duke'
   },
   {
     year: '2010',
-    winner: 'Virginia Tech'
+    football: 'Virginia Tech',
+    basketball: 'Duke'
   },
   {
     year: '2011',
-    winner: 'Clemson'
+    football: 'Clemson',
+    basketball: 'Duke'
   },
   {
     year: '2012',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Florida State'
   },
   {
     year: '2013',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Miami'
   },
   {
     year: '2014',
-    winner: 'Florida State'
+    football: 'Florida State',
+    basketball: 'Virginia'
+  },
+  {
+    year: '2015',
+    football: 'To Be Determined',
+    basketball: 'Notre Dame'
   }
 ];
 
