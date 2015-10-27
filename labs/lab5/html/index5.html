@@ -4,11 +4,29 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(document).ready(function(){
-    $("button").click(function(){
+    $("#btn1").click(function(){
         var myobj = {Name:$("#Name").val(),Comment:$("#Comment").val()};
         jobj = JSON.stringify(myobj);
         $("#json").text(jobj);
+        var url = "comment";
+        $.post(url,jobj,function(data,textStatus) {
+          $("#done").append(textStatus);
+        });
     });
+    $("#btn2").click(function(){
+      console.log("clicked btn2");
+      var url = "comment";
+      $.getJSON(url,function(data) {
+          var everything;
+          everything = "<ul>";
+          $.each(data, function(i,item) {
+            everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment;
+          });
+          everything += "</ul>";
+          $("#currentComments").html(everything);
+        });
+    });
+
 });
 </script>
 </head>
@@ -19,9 +37,13 @@ $(document).ready(function(){
   comment: <input type="text" id="Comment" value="Hello"><br>
 </form>
 
-<button>Serialize form values</button>
+<button id="btn1">Submit Comment</button>
+<button id="btn2">Show Comment</button>
+
 
 <div id="json"></div>
+<div id="done"></div>
+<div id="currentComments"></div>
 
 </body>
 </html>
