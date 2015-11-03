@@ -5,7 +5,6 @@ myApp.controller('MessageController', function($scope, $http)
 
   $scope.messagelist = [];
   $scope.users = [];
-  console.log("agentx: " + $scope.agentx);
   $scope.body = true;
   $scope.login = false;
 
@@ -23,17 +22,14 @@ myApp.controller('MessageController', function($scope, $http)
       data: jobj
     }).then(function successCallback(data)
       {
-        console.log("Success - user");
-        console.log("jobj: " + jobj);
-        console.log("data: " + data);
+
         var url = "user";
         $http({
           method: "GET",
           url: url
         }).then(function successCallback(response)
         {
-          console.log("succes");
-          console.log(response);
+          console.log("success");
           var items = response['data'];
           for (var i=0; i < items.length; i++)
           {
@@ -56,12 +52,12 @@ myApp.controller('MessageController', function($scope, $http)
 
   $scope.onSend = function()
   {
+    var count =0;
     $scope.messagelist.push({name: $scope.name, phoneNumber: $scope.phoneNumber, message: $scope.messageBody, agent: $scope.agent, done: false});
     $scope.name = "";
     $scope.phoneNumber = "";
     $scope.messageBody = "";
     console.log("Sent!");
-    console.log("Agent: " + $scope.agent)
     var url = "message";
     var jobj = JSON.stringify($scope.messagelist);
     $http({
@@ -71,14 +67,18 @@ myApp.controller('MessageController', function($scope, $http)
     }).then(function successCallback(data)
     {
       $scope.messagelist = [];
-
+      count++;
+      if (count == 1)
+      {
+        console.log("refreshing send");
+        $scope.refresh();
+      }
     }, function errorCallback(data)
     {
       console.log("error");
       console.log(data);
     });
 
-    $scope.refresh();
   }
 
   $scope.refresh = function()
@@ -94,7 +94,6 @@ myApp.controller('MessageController', function($scope, $http)
     }).then(function successCallback(response)
     {
       console.log("success");
-      console.log(response);
 
       var items = response['data'];
       for (var i=0; i < items.length; i++)
@@ -112,13 +111,14 @@ myApp.controller('MessageController', function($scope, $http)
 
   $scope.removeMsg = function()
   {
+    var count = 0;
     $scope.toDelete = [];
     for (var i=0; i < $scope.specMessages.length; i++)
     {
       if ($scope.specMessages[i].done)
       {
         console.log("i: " + i + " " + $scope.specMessages[i].message);
-        $scope.toDelete.push({message: $scope.specMessages[i].message});
+        $scope.toDelete.push({name: $scope.specMessages[i].name, phoneNumber: $scope.specMessages[i].phoneNumber, message: $scope.specMessages[i].message});
       }
     }
     for (var i=0; i < $scope.toDelete.length; i++)
@@ -133,15 +133,21 @@ myApp.controller('MessageController', function($scope, $http)
       }).then(function successCallback(data)
       {
         console.log("success");
+        if (count == $scope.toDelete.length - 1)
+        {
+          console.log("refreshing");
+          $scope.refresh();
+        }
+        count++;
 
       }, function errorCallback(data)
       {
+
         console.log("error");
         console.log(data);
       });
     }
-    $scope.refresh();
-      
+
   }
 
 });

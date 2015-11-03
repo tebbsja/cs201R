@@ -4,7 +4,9 @@ var url = require('url');
 var readline = require('readline');
 var ROOT_DIR = "html/";
 
+
 http.createServer(function (req, res) {
+
   var urlObj = url.parse(req.url, true, false);
   var nUrlObj = url.format(urlObj);
 
@@ -21,7 +23,7 @@ http.createServer(function (req, res) {
         var reqObj = JSON.parse(jsonData);
         //console.log("reqObj: " + reqObj[0]);
         console.log(reqObj);
-        var count = 0;
+
         var MongoClient = require('mongodb').MongoClient;
         MongoClient.connect("mongodb://localhost/tbig", function(err, db) {
           if(err) throw err;
@@ -34,7 +36,7 @@ http.createServer(function (req, res) {
             messages.remove(reqObj, function(err, results) {
               console.log("DELETED: " + results + " documents");
                 res.writeHead(200);
-                res.end("");
+                res.end("success");
               });
               });
             });
