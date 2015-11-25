@@ -1,7 +1,14 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['socket-io']);
 
-myApp.controller('MessageController', function($scope, $http)
+myApp.controller('MessageController', function($scope, $http, socket)
 {
+
+  socket.on('refresh', function(){
+    $scope.refresh();
+    console.log('socket refreshing');
+  });
+
+
 
   $scope.messagelist = [];
   $scope.users = [];
@@ -13,7 +20,6 @@ myApp.controller('MessageController', function($scope, $http)
     $scope.usrInitials = [];
 
     $scope.users.push({user: $scope.initials});
-    console.log($scope.users);
     var url = "user";
     var jobj = JSON.stringify($scope.users);
     $http({
@@ -52,12 +58,16 @@ myApp.controller('MessageController', function($scope, $http)
 
   $scope.onSend = function()
   {
+    //on send i want to broadcast to client w/ matching agent code w/ socket.io
+
+
     var count =0;
     $scope.messagelist.push({name: $scope.name, phoneNumber: $scope.phoneNumber, message: $scope.messageBody, agent: $scope.agent, done: false});
+    socket.emit('test', $scope.messagelist);
+
     $scope.name = "";
     $scope.phoneNumber = "";
     $scope.messageBody = "";
-    console.log("Sent!");
     var url = "message";
     var jobj = JSON.stringify($scope.messagelist);
     $http({
@@ -70,7 +80,6 @@ myApp.controller('MessageController', function($scope, $http)
       count++;
       if (count == 1)
       {
-        console.log("refreshing send");
         $scope.refresh();
       }
     }, function errorCallback(data)
@@ -86,19 +95,17 @@ myApp.controller('MessageController', function($scope, $http)
     $scope.specMessages = [];
 
     $scope.agentx = $scope.initials;
-    console.log("agent: " + $scope.agentx);
     var url = "message?q=" + $scope.agentx;
     $http({
       method: "GET",
       url: url
     }).then(function successCallback(response)
     {
-      console.log("success");
+
 
       var items = response['data'];
       for (var i=0; i < items.length; i++)
       {
-        console.log(items[i].name + " " + items[i].phoneNumber + " " +items[i].message);
           $scope.specMessages.push({name: items[i].name, phoneNumber: items[i].phoneNumber, message: items[i].message});
       }
 
@@ -117,7 +124,7 @@ myApp.controller('MessageController', function($scope, $http)
     {
       if ($scope.specMessages[i].done)
       {
-        console.log("i: " + i + " " + $scope.specMessages[i].message);
+
         $scope.toDelete.push({name: $scope.specMessages[i].name, phoneNumber: $scope.specMessages[i].phoneNumber, message: $scope.specMessages[i].message});
       }
     }
@@ -125,7 +132,6 @@ myApp.controller('MessageController', function($scope, $http)
     {
       var url = "delete";
       var jobj = JSON.stringify($scope.toDelete[i]);
-      console.log("SENDING TO DELETE: " + i + " " + jobj);
       $http({
         method: "POST",
         url: url,
