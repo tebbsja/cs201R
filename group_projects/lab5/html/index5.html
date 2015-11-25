@@ -56,7 +56,7 @@
   <div id="right" class="col-md-6">
       <h1 class="text-center">To Do:</h1>
       <div ng-repeat="messages in specMessages">
-        <input ng-model="messages.done" type="checkbox"><span class="space">{{messages.name + " " + messages.phoneNumber + " " + messages.message}}</span>
+        <input ng-model="messages.done" type="checkbox"><span class="space">{{messages.name + " " + messages.phoneNumber + " " + messages.message}} {{messages.date | date: 'M/d/yy h:mm a'}} </span>
       </div>
       <div align="center">
         <button ng-click="refresh()" type="button" class="btn btn-default">Refresh</button>

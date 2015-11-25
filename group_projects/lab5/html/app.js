@@ -60,9 +60,11 @@ myApp.controller('MessageController', function($scope, $http, socket)
   {
     //on send i want to broadcast to client w/ matching agent code w/ socket.io
 
+    $scope.date = new Date();
+    // {{ date | date: short }}
 
     var count =0;
-    $scope.messagelist.push({name: $scope.name, phoneNumber: $scope.phoneNumber, message: $scope.messageBody, agent: $scope.agent, done: false});
+    $scope.messagelist.push({name: $scope.name, phoneNumber: $scope.phoneNumber, message: $scope.messageBody, agent: $scope.agent, date: $scope.date, done: false});
     socket.emit('test', $scope.messagelist);
 
     $scope.name = "";
@@ -101,12 +103,12 @@ myApp.controller('MessageController', function($scope, $http, socket)
       url: url
     }).then(function successCallback(response)
     {
-
+      console.log(JSON.stringify(response));
 
       var items = response['data'];
       for (var i=0; i < items.length; i++)
       {
-          $scope.specMessages.push({name: items[i].name, phoneNumber: items[i].phoneNumber, message: items[i].message});
+          $scope.specMessages.push({name: items[i].name, phoneNumber: items[i].phoneNumber, message: items[i].message, date: items[i].date});
       }
 
     }, function errorCallback(response)
@@ -124,7 +126,6 @@ myApp.controller('MessageController', function($scope, $http, socket)
     {
       if ($scope.specMessages[i].done)
       {
-
         $scope.toDelete.push({name: $scope.specMessages[i].name, phoneNumber: $scope.specMessages[i].phoneNumber, message: $scope.specMessages[i].message});
       }
     }

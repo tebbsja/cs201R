@@ -51,6 +51,7 @@ var server = http.createServer(function (req, res) {
       });
       req.on('end', function () {
         var reqObj = JSON.parse(jsonData);
+        console.log(reqObj);
 
         // Now put it into the database
         var MongoClient = require('mongodb').MongoClient;
